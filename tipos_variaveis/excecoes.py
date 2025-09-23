@@ -2,13 +2,15 @@
 
 
 print("exemplo de captura de exceções")
-
-while True:
-    try:
-        numero = int(input("Digite um número inteiro: "))
-        resultado = 10 / numero
-        print(f"resultado {resultado}")
-    except ValueError as e:
-        print(f"Erro de value error: {e}")
-    except Exception as e:
-        print(f"Erro: {e}")
+try:
+    numero = int(input("Digite um número inteiro: "))
+    resultado = 10 / numero
+except ValueError as e:
+    print(f"Erro de value error: {e}")
+    raise ValueError("Tipo de variaveis incomplativeis")
+except Exception as e:
+    print(f"Erro: {e}")
+else:
+    print(f"Resultado: {resultado}")
+finally:
+    print("Operacao finalizada")
