@@ -11,16 +11,40 @@ def ver_contatos(agendas):
     for indice, agenda in enumerate(agendas, start=1):
         status = "✓" if agenda["salvo"] else " "
         contato = agenda["agenda"]
-        print(f"{indice}. [{status}] ({contato})")
+        print(f"{indice}. [{status}] {contato}")
 
 def favoritar_contato(agendas, indice_contato):
     indice_contato_favoritado = int(indice_contato) - 1
-    agendas[indice_contato_favoritado]["salvo"] = True
-    print("Contato favoritado :)")
+    if not agendas[indice_contato_favoritado]["salvo"]:
+        agendas[indice_contato_favoritado]["salvo"] = True
+        print("Contato favoritado :)")
+    else:
+        agendas[indice_contato_favoritado]["salvo"] = False
+        print("Contato desmarcado como favorito :(")
+
     return
 
-def atualizar_contato(agendas, indice_contato, novo_nome_agenda):
-    print("Contato atualizado com sucesso!")
+def atualizar_contato(agendas, indice_contato, nova_agenda):
+    indice_contato_atualizado = int(indice_contato) - 1
+    if indice_contato_atualizado >= 0 and indice_contato_atualizado <= len(agendas):
+        agendas[indice_contato_atualizado]["agenda"] = nova_agenda
+        print(f"Contato{indice_contato} atualizado para {nova_agenda}")
+    else:
+        print("Índice de tarefa inválido.")
+    return
+
+def ver_contatos_favoritos(agendas):
+    print("\nContatos favoritos: ")
+    for indice, agenda in enumerate(agendas, start=1):
+        if agenda["salvo"]:
+            print(f"{indice}. {agenda['agenda']}")
+
+def apagar_contato(agendas):
+    for agenda in agendas:
+        if agenda["salvo"]: 
+            agendas.remove(agenda)
+    print("Agenda removida com sucesso.")
+    return
 
 agendas = []
 
@@ -37,18 +61,25 @@ while True:
     escolha = input("Digite a sua escolha:")
 
     if escolha == "1":
-        contato = input("Digite o contato na ordem; nome, telefone, email e se é favorito: ")
+        contato = input("Digite o contato na ordem; nome, telefone, email: ")
         adicionar_contato(agendas, contato)
     elif escolha == "2":
         ver_contatos(agendas)
     elif escolha == "3":
         ver_contatos(agendas)
-        indice_contato = input("Digite o número do contato que deseja favoritar: ")
+        indice_contato = input("Digite o contato que deseja marcar/desmarcar como favorito: ")
         favoritar_contato(agendas, indice_contato)
     elif escolha == "4":
         ver_contatos(agendas)
-        nova_agenda = input("Escolha uma agenda para atualizar: ")
-        atualizar_contato(agendas, indice_contato)
+        indice_contato = input("Escolha a agenda que deseja atualizar:")
+        nova_agenda = input("Digite o novo nome da agenda: ")
+        atualizar_contato(agendas, indice_contato, nova_agenda)
+    elif escolha == "5":
+        ver_contatos_favoritos(agendas)
+    elif escolha == "6":
+        ver_contatos(agendas)
+        indice_contato = input("Selecione o contato a ser removido: ")
+        apagar_contato(agendas)
     elif escolha == "7":
         break
     
