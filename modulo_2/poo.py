@@ -17,7 +17,6 @@ class Pessoa:
 
 pessoa1 = Pessoa("Alice", 30)
 mensagem = pessoa1.saudacao()
-
 print(mensagem)
 
 pessoa2 = Pessoa("Rodrigo", 32)
