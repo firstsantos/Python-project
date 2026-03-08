@@ -1,4 +1,4 @@
-# Personagem: classe mãe , tudo que é comum entre os outros 
+w# Personagem: classe mãe , tudo que é comum entre os outros 
 # Heroi: controlado pelo usuario
 # inimigo: adversario do usuário
 
